@@ -1,0 +1,59 @@
+name: codeblock-bff
+services:
+  redis:
+    image: harbor.dev.ppfd.kr/docker/redis:7-alpine
+    container_name: bff-codeblock-redis
+    restart: unless-stopped
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+  mongodb:
+    image: harbor.dev.ppfd.kr/docker/mongo:8.0
+    container_name: bff-codeblock-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - mongodb-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+  app:
+    container_name: codeblock-bff-app
+    restart: unless-stopped
+    build: 
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    working_dir: /app
+    volumes:
+      - ../:/app
+      # AWS credentials (선택적)
+      - type: bind
+        source: ~/.aws
+        target: /root/.aws
+        read_only: true
+        bind:
+          create_host_path: true
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    env_file:
+      - ../.env
+    command: sleep infinity
+
+volumes:
+  redis_data:
+  mongodb-data:
