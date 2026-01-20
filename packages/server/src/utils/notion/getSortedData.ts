@@ -14,6 +14,7 @@ export const getSortedData = async (): Promise<DataSource[]> => {
   const parsedData = await getDataSource();
 
   const sortedData: DataSource[] = parsedData
+    .filter((item) => item.url)
     .sort((a, b) => {
       const aGroup = a.group;
       const bGroup = b.group;

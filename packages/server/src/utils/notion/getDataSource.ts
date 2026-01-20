@@ -2,9 +2,8 @@ import { client } from "./index";
 import map from "./map";
 
 const getDataSource = async () => {
-  // Using databases.query instead of dataSources (dataSources is not a standard Notion API)
-  const response = await client.databases.query({
-    database_id: process.env.NOTION_DATA_SOURCE_ID!,
+  const response = await client.dataSources.query({
+    data_source_id: process.env.NOTION_DATA_SOURCE_ID!,
   });
 
   const parsedData = response.results

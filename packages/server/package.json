@@ -8,10 +8,10 @@
     "build": "bun --env-file=../../.env build src/index.ts --outdir dist --target bun"
   },
   "dependencies": {
-    "mongodb": "^6.12.0",
-    "@notionhq/client": "^2.2.15",
+    "@codeblock-bff/shared": "workspace:*",
+    "@notionhq/client": "^5.7.0",
     "dayjs": "^1.11.13",
-    "@codeblock-bff/shared": "workspace:*"
+    "mongodb": "^6.12.0"
   },
   "devDependencies": {
     "@types/bun": "latest",
