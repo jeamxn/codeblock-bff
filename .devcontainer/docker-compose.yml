@@ -2,7 +2,7 @@ name: codeblock-bff
 services:
   redis:
     image: harbor.dev.ppfd.kr/docker/redis:7-alpine
-    container_name: bff-codeblock-redis
+    container_name: codeblock-bff-redis
     restart: unless-stopped
     volumes:
       - redis_data:/data
@@ -16,7 +16,7 @@ services:
       retries: 5
   mongodb:
     image: harbor.dev.ppfd.kr/docker/mongo:8.0
-    container_name: bff-codeblock-mongodb
+    container_name: codeblock-bff-mongodb
     restart: unless-stopped
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
