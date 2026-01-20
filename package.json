@@ -1,0 +1,17 @@
+{
+  "name": "codeblock-bff",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "shared"
+  ],
+  "scripts": {
+    "dev:server": "bun run --cwd packages/server dev",
+    "dev:web": "bun run --cwd packages/web dev",
+    "dev": "bun run dev:server & bun run dev:web",
+    "build:server": "bun run --cwd packages/server build",
+    "build:web": "bun run --cwd packages/web build",
+    "build": "bun run build:server && bun run build:web"
+  }
+}
