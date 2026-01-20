@@ -28,3 +28,6 @@ npm-debug.log*
 
 # Bun
 bun.lockb
+
+# Turborepo
+.turbo/
