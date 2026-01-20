@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "dev": "bun --bun --env-file=../../.env vite",
+    "build": "bun --bun --env-file=../../.env vue-tsc -b && bun --bun --env-file=../../.env vite build",
+    "preview": "bun --bun --env-file=../../.env vite preview"
   },
   "dependencies": {
     "vue": "^3.5.13",
